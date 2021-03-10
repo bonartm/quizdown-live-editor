@@ -26,7 +26,7 @@
   "dependencies": {
     "codejar": "^3.3.0",
     "highlight.js": "^10.6.0",
-    "quizdown": "git://github.com/bonartm/quizdown-js.git#v0.0.3",
+    "quizdown": "git://github.com/bonartm/quizdown-js.git#v0.0.4",
     "sirv-cli": "^1.0.0"
   }
 }
