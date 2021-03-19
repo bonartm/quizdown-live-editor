@@ -24,9 +24,10 @@
     "typescript": "^4.0.0"
   },
   "dependencies": {
+    "@simonwep/pickr": "^1.8.0",
     "codejar": "^3.3.0",
     "highlight.js": "^10.6.0",
-    "quizdown": "git://github.com/bonartm/quizdown-js.git#v0.0.4",
+    "quizdown": "https://github.com/bonartm/quizdown-js/archive/v0.0.4.tar.gz",
     "sirv-cli": "^1.0.0"
   }
 }
