@@ -6,3 +6,11 @@ body {
     font-size: 1em;
     line-height: 1;
 }
+
+a {
+    color:gray;
+}
+
+a:hover {
+    text-decoration: underline;
+}
