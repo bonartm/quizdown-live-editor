@@ -8,14 +8,16 @@ import { create_bidirectional_transition } from 'svelte/internal';
 export let code: string;
 export let id: string;
 
-onMount(async () => {		
-    let node = document.getElementById(id)
+
+let node;
+
+onMount(async () => { 
+    node = document.getElementById(id)   
     create_app(code, node)
 });
 
 $: {
     if (document.readyState === "complete"){
-        let node = document.getElementById(id)
         create_app(code, node)
     }
 }
