@@ -20,14 +20,10 @@
     }
 </script>
 
-<ul>
-    <li>
-        Primary Color: <span><ColorPicker bind:color={primary_color} id='pickr_1'></ColorPicker></span>
-    </li>
-    <li>
-        Secondary Color: <span><ColorPicker bind:color={secondary_color} id='pickr_2'></ColorPicker></span>
-    </li>
-</ul>
+<h3>Color theme:</h3>
+
+<ColorPicker bind:color={primary_color} id='pickr_1'></ColorPicker>
+<ColorPicker bind:color={secondary_color} id='pickr_2'></ColorPicker>
 
 
 
