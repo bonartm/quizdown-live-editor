@@ -4,7 +4,12 @@
     import Options from './Options.svelte'
     import { default_code } from './default_quiz.js'
 
-    let code = default_code()
+    let code = default_code();
+
+    function add_to_code(type:string){
+        code += '\n\n' + default_code(type)
+        code = code.trim()
+    }
 </script>
 
 
@@ -13,7 +18,14 @@
 
     <div class="flex three grow">
         <div>
-            <div class="title"><span>Code Editor</span></div>
+            <div class="title"><span>Code Editor </span></div>
+
+            <div id="input-buttons" class="flex two">
+                <button on:click={()=> add_to_code('multiple-choice')}>➕ Multiple Choice</button>
+                <button on:click={()=> add_to_code('single-choice')}>➕ Single Choice</button>
+                <button on:click={()=> add_to_code('sequence')}>➕ Sequence</button>
+                <button on:click={()=> code = ''}>🗑️ Clear</button>
+            </div>
             <Editor bind:code id="quizdown-editor"></Editor>
             <div class="title"><span>Options</span></div>
             <Options quizdown_app_id="quizdown-app"></Options>
@@ -45,6 +57,22 @@
 </div>
 
 <style>
+    #input-buttons {
+        padding-right: 1em;
+        padding-left: 1em;
+        width:90%;
+
+    }
+
+    #input-buttons button {
+        background-color: unset;
+        text-align: left;  
+    }
+
+    #input-buttons button:hover {
+        background-color: lightgray;
+    }
+
     .title {
         background-color: lightgray;
         width:90%;

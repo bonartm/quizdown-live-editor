@@ -19,12 +19,22 @@
         editor.innerHTML = highlightedCode
     }
 
+    let jar = undefined;
+
     onMount(async () => {		
         let node = document.getElementById(id)
-        const jar = CodeJar(node, withLineNumbers(highlight), {tab: '    '});
+        jar = CodeJar(node, withLineNumbers(highlight), {tab: '    '});
         jar.updateCode(code)
         jar.onUpdate(debounce((update => {code = update}), 1500, false));
 	});
+
+    $: {
+        if (document.readyState === "complete"){
+            jar.updateCode(code)      
+        }                
+    }
+
+  
 </script>
 
 <div id="{id}" class="editor-area"></div>
@@ -34,7 +44,7 @@
     :global(.codejar-linenumbers){
         mix-blend-mode: normal !important;
         color: gray !important;
-    }
+    } 
 
     .editor-area{
         width:90%;
