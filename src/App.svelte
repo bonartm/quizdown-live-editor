@@ -1,19 +1,11 @@
 <script lang="ts">
 	import Editor from './Editor.svelte'
     import Quizdown from './Quizdown.svelte';
-    import Options from './Options.svelte'
-    import { default_code } from './default_quiz.js'
-
-    let code = default_code();
-
-    function add_to_code(type:string){
-        code += '\n\n' + default_code(type)
-        code = code.trim()
-    }
+    import { default_code, add_to_code } from './default_quiz.js'
+    let code = default_code(true);
 </script>
 
-
-<div class="container" style="margin: auto; width: 80%; max-width:1200px;">
+<div class="container" style="margin: auto; width: 90%; max-width:1400px;">
     <h1>Quizdown Live Editor</h1>   
 
     <div class="flex three grow">
@@ -21,18 +13,16 @@
             <div class="title"><span>Code Editor </span></div>
 
             <div id="input-buttons" class="flex two">
-                <button on:click={()=> add_to_code('multiple-choice')}>➕ Multiple Choice</button>
-                <button on:click={()=> add_to_code('single-choice')}>➕ Single Choice</button>
-                <button on:click={()=> add_to_code('sequence')}>➕ Sequence</button>
+                <button on:click={()=> code = add_to_code(code, 'multiple-choice')}>➕ Multiple Choice</button>
+                <button on:click={()=> code = add_to_code(code,'single-choice')}>➕ Single Choice</button>
+                <button on:click={()=> code = add_to_code(code, 'sequence')}>➕ Sequence</button>
                 <button on:click={()=> code = ''}>🗑️ Clear</button>
             </div>
-            <Editor bind:code id="quizdown-editor"></Editor>
-            <div class="title"><span>Options</span></div>
-            <Options quizdown_app_id="quizdown-app"></Options>
+            <Editor bind:code></Editor>
         </div>
         <div>
             <div class="title"><span>App Preview</span></div>
-            <Quizdown bind:code id="quizdown-app"></Quizdown>
+            <Quizdown bind:code></Quizdown>
         </div>       
     </div>
 
@@ -61,6 +51,7 @@
         padding-right: 1em;
         padding-left: 1em;
         width:90%;
+        padding-bottom: 1em;
 
     }
 

@@ -1,8 +1,34 @@
-export function default_code(type?:string){
-    let output: string;
+export function add_to_code(code:string, type:string): string {
+    if (code.trim()===''){
+        code += default_code(true, type)
+    } else {
+        code += '\n\n\n' + default_code(false, type)
+    }
+    return code.trim();
+}
+
+export function set_header(code:string, options={}): string {
+    // remove header if exists
+    code = code.replace(/---[^-]*?---/, "").trim();
+
+    // create new header
+    let header = '---\n';
+    for (var prop in options) {
+        if (Object.prototype.hasOwnProperty.call(options, prop)) {
+            header = header.concat(prop, ": ", options[prop], "\n")            
+        }
+    }
+    header = header.concat('---\n\n')
+    return header.concat(code);
+}
+
+
+export function default_code(with_header:boolean=false, type:string='multiple-choice'){
+    let body: string;   
+
     switch (type) {
         case 'multiple-choice':
-            output = `
+            body = `
 # The sound of dog
 
 What do dogs sound like?
@@ -21,7 +47,8 @@ class Dog(Animal):
 - [x] wuff`
             break;
         case 'single-choice':
-            output = `
+            body = `
+
 # What is the capital of Germany?      
 
 > It's the largest city in Germany!         
@@ -32,7 +59,7 @@ class Dog(Animal):
 1. [ ] Munich`
             break;
         case 'sequence':
-            output = `
+            body = `
 # Put the [days](https://en.wikipedia.org/wiki/Day) in order!
 
 > Monday is the *first* day of the week.
@@ -44,8 +71,18 @@ class Dog(Animal):
 5. Saturday`
             break;       
         default:
-            output = default_code('multiple-choice')
+            body = default_code(with_header, type)
             break;
     }
-    return output.trim();
+    if (with_header){
+        return set_header(body.trim(), {
+            primary_color:'orange',
+            secondary_color:'lightgray',
+            title_color: 'black',
+            shuffle_questions: false,
+            shuffle_answers: true
+        });
+    } else {
+        return body.trim()
+    }    
 }
