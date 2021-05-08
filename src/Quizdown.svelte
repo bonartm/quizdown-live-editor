@@ -2,11 +2,10 @@
 
 import { onMount } from 'svelte';
 import { create_app } from 'quizdown'
-import 'quizdown/public/build/quizdown.css';
 
 export let code: string;
 
-let quizdown_node;
+let quizdown_node: HTMLElement;
 
 onMount(async () => {     
     create_app(code, quizdown_node, {})
