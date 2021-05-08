@@ -76,9 +76,9 @@ class Dog(Animal):
     }
     if (with_header){
         return set_header(body.trim(), {
-            primary_color:'orange',
-            secondary_color:'lightgray',
-            title_color: 'black',
+            primary_color:'steelblue',
+            secondary_color:'\'#e8e8e8\'',
+            text_color: 'black',
             shuffle_questions: false,
             shuffle_answers: true
         });
