@@ -80,7 +80,8 @@ class Dog(Animal):
             secondary_color:'\'#e8e8e8\'',
             text_color: 'black',
             shuffle_questions: false,
-            shuffle_answers: true
+            shuffle_answers: true,
+            locale: 'en'
         });
     } else {
         return body.trim()
