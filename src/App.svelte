@@ -10,9 +10,9 @@
     function set_code_url(code:string){
         let urlcode = encodeURIComponent(code)
         if (!!urlcode){
-            history.replaceState(null, "", '/?code='+urlcode)
+            history.replaceState(null, "", './?code='+urlcode)
         } else {
-            history.replaceState(null, "", '/')
+            history.replaceState(null, "", './')
         }
     }
 
