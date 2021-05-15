@@ -2,7 +2,38 @@
 	import Editor from './Editor.svelte'
     import Quizdown from './Quizdown.svelte';
     import { default_code, add_to_code } from './default_quiz.js'
-    let code = default_code(true);
+    import { onMount } from 'svelte';
+
+    let code = '';
+    let mounted = false;
+
+    function set_code_url(code:string){
+        let urlcode = encodeURIComponent(code)
+        if (!!urlcode){
+            history.replaceState(null, "", '/?code='+urlcode)
+        } else {
+            history.replaceState(null, "", '/')
+        }
+    }
+
+    onMount(async () => {
+        let params = new URLSearchParams(window.location.search);
+        if (!!params.get('code')){
+            // set code from url
+            code = decodeURIComponent(params.get('code'))
+        } else {
+            code = default_code(true);
+            set_code_url(code);
+        }
+        mounted = true;
+	});
+
+    $: {
+        if (mounted){
+            set_code_url(code);
+        }
+    }
+
 </script>
 
 <div class="container" style="margin: auto; width: 90%; max-width:1400px;">
@@ -22,7 +53,7 @@
         </div>
         <div>
             <div class="title"><span>App Preview</span></div>
-            <Quizdown bind:code></Quizdown>
+            <Quizdown bind:code mounted={mounted}></Quizdown>
         </div>       
     </div>
 

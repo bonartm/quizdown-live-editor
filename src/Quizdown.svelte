@@ -3,16 +3,14 @@
 import { onMount } from 'svelte';
 import { create_app } from 'quizdown'
 
+
+export let mounted: boolean;
 export let code: string;
 
 let quizdown_node: HTMLElement;
 
-onMount(async () => {     
-    create_app(code, quizdown_node, {})
-});
-
 $: {
-    if (document.readyState === "complete"){
+    if (mounted){
         create_app(code, quizdown_node, {})
     }
 }
