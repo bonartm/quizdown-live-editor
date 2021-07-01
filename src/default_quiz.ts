@@ -29,27 +29,29 @@ export function default_code(with_header:boolean=false, type:string='multiple-ch
     switch (type) {
         case 'multiple-choice':
             body = `
-# The sound of dog
+# Python Lists
 
-What do dogs sound like?
+What is the value of \`x[2]\`?
 
-> Some hint
+> Python lists are mutable!
 
 \`\`\`python
-class Dog(Animal):
-    def __init__(self, name):
-        self.name = name
+x = [2, 3, 4]
+x[2] = 4
+print(x[2])
 \`\`\`
 
-- [ ] yes
-- [ ] no
-- [ ] \`self.sound = "meow"\`
-- [x] wuff`
+- [ ] 1
+- [ ] 2
+- [ ] 3
+- [x] 4`
             break;
         case 'single-choice':
             body = `
 
-# What is the capital of Germany?      
+# What is the capital of Germany? 
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Siegessaeule_Aussicht_10-13_img4_Tiergarten.jpg/405px-Siegessaeule_Aussicht_10-13_img4_Tiergarten.jpg)
 
 > It's the largest city in Germany!         
 
@@ -57,10 +59,17 @@ class Dog(Animal):
 1. [x] Berlin
 1. [ ] Hamburg
 1. [ ] Munich`
+
             break;
         case 'sequence':
             body = `
 # Put the [days](https://en.wikipedia.org/wiki/Day) in order!
+
+Quizdown also renders formulas:
+
+$$
+x = \\frac{a+b^2}{\\sqrt{b+c}}
+$$
 
 > Monday is the *first* day of the week.
 

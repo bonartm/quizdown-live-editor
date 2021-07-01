@@ -1,7 +1,9 @@
 <script lang='ts'> 
 
 import { onMount } from 'svelte';
-import { create_app } from 'quizdown'
+import quizdownHighlight from 'quizdown/public/build/extensions/quizdownHighlight.js'
+import quizdownKatex from 'quizdown/public/build/extensions/quizdownKatex.js'
+import quizdown from 'quizdown'
 
 
 export let mounted: boolean;
@@ -11,7 +13,7 @@ let quizdown_node: HTMLElement;
 
 $: {
     if (mounted){
-        create_app(code, quizdown_node, {})
+        quizdown.register(quizdownHighlight).register(quizdownKatex).create_app(code, quizdown_node, {})
     }
 }
 </script>
