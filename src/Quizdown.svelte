@@ -13,7 +13,7 @@ let quizdown_node: HTMLElement;
 
 $: {
     if (mounted){
-        quizdown.register(quizdownHighlight).register(quizdownKatex).create_app(code, quizdown_node, {})
+        quizdown.register(quizdownHighlight).register(quizdownKatex).createApp(code, quizdown_node, {})
     }
 }
 </script>
