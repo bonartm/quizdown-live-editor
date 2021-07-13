@@ -15,21 +15,12 @@ let app: App;
 
 $: {
     if (editorReady){
-        if (app){
-            try {
-                // update the app with the new quizdown
-                let quiz = quizdown.parseQuizdown(code, {}) 
-                app.$set({quiz: quiz})       
-            } catch (e) {
-                // destroy the app on error and trigger a rebuild
-                app.$destroy()
-                app = undefined
-            }
-        }
-        if (!app) app = quizdown.register(quizdownHighlight).register(quizdownKatex).createApp(code, quizdown_node, {})
+        if (app) app.$destroy();       
+        app = quizdown.register(quizdownHighlight).register(quizdownKatex).createApp(code, quizdown_node, {})
 
 
-                    
+
+        
        
     }
 }
