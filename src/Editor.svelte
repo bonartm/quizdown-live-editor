@@ -11,41 +11,30 @@
 
     let editor_node: HTMLElement;
     let editor;
+    export let editorReady: boolean;
 
     onMount(async () => {
-        loader.init().then(monaco => {
-            editor = monaco.editor.create(editor_node, {
-                value: code,
-                language: 'markdown',
-                automaticLayout: true,
-                fontSize: 13
-            });
-            editor.onDidChangeModelContent(debounce((e => {
-                code = editor.getValue()
-            }), 500, false));                 
-        }); 
-	});
+        editorReady = false;
+        let monaco = await loader.init()
+        editor = monaco.editor.create(editor_node, {
+            value: code,
+            language: 'markdown',
+            automaticLayout: true,
+            fontSize: 13
+        });
+        editor.onDidChangeModelContent(debounce((e => {
+            code = editor.getValue()
+        }), 500, false));   
+        editorReady = true;              
+    }); 
 
-    $: {
-        if (document.readyState === "complete"){
-            //only update if code was changed from outside
-            if (editor.getValue() !== code){
-                editor.setValue(code)
-            }
-        }
-    }    
-
-
-
-
-
+    $: if (editorReady && editor.getValue() !== code) editor.setValue(code)
   
 </script>
 
 <div class='editor-container' bind:this={editor_node}></div>
 
 <style>
-
     .editor-container {
         height:600px;
         max-height:900px;

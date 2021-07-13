@@ -3,9 +3,12 @@
     import Quizdown from './Quizdown.svelte';
     import { default_code, add_to_code } from './default_quiz.js'
     import { onMount } from 'svelte';
+    import { fade } from 'svelte/transition';
+import Loading from './Loading.svelte';
 
     let code = '';
-    let mounted = false;
+    let editorReady = false;
+    let node: HTMLElement;
 
     function set_code_url(code:string){
         let urlcode = encodeURIComponent(code)
@@ -22,24 +25,21 @@
             // set code from url
             code = decodeURIComponent(params.get('code'))
         } else {
-            code = default_code(true);
-            set_code_url(code);
-        }
-        mounted = true;
+            code = default_code(true);        }
 	});
 
-    $: {
-        if (mounted){
-            set_code_url(code);
-        }
-    }
-
+    $: if (editorReady) set_code_url(code);
+    $: if (editorReady) node.classList.remove('hidden')    
 </script>
 
 <div class="container" style="margin: auto; width: 90%; max-width:1400px;">
-    <h1>Quizdown Live Editor</h1>   
+    <h1>Quizdown Live Editor</h1>
 
-    <div class="flex three grow">
+    {#if !editorReady}
+        <Loading></Loading>
+    {/if}
+   
+    <div bind:this={node} class="flex three grow hidden">
         <div>
             <div class="title"><span>Code Editor </span></div>
 
@@ -49,13 +49,20 @@
                 <button on:click={()=> code = add_to_code(code, 'sequence')}>➕ Sequence</button>
                 <button on:click={()=> code = ''}>🗑️ Clear</button>
             </div>
-            <Editor bind:code></Editor>
+            <Editor bind:editorReady bind:code></Editor>
         </div>
         <div>
             <div class="title"><span>App Preview</span></div>
-            <Quizdown bind:code mounted={mounted}></Quizdown>
+            <Quizdown bind:code editorReady={editorReady}></Quizdown>
         </div>       
     </div>
+        
+  
+    
+
+   
+
+    
 
     <div class="flex two grow">
         <div class="title"><span>About</span></div>
@@ -78,6 +85,11 @@
 </div>
 
 <style>
+
+    .hidden {
+        display: none;
+    }
+
     #input-buttons {
         padding-right: 1em;
         padding-left: 1em;
