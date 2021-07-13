@@ -26,7 +26,7 @@
   "dependencies": {
     "@monaco-editor/loader": "^1.0.1",
     "monaco-editor": "^0.23.0",
-    "quizdown": "^0.4.0",
+    "quizdown": "^0.4.1",
     "sirv-cli": "^1.0.0"
   }
 }
