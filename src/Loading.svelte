@@ -1,16 +1,11 @@
-<script lang='ts'> 
-
-
-    
-   
+<script lang="ts">
 </script>
 
 <!-- https://projects.lukehaas.me/css-loaders/ -->
 <div class="loader">Loading...</div>
-    
-    
+
 <style>
-    .loader,
+.loader,
 .loader:before,
 .loader:after {
   background: #4682b4;
@@ -69,9 +64,4 @@
     height: 5em;
   }
 }
-
 </style>
-    
-    
-    
-    
