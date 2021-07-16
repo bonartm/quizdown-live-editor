@@ -20,6 +20,7 @@
     right: 2em;
     z-index: 99;
     background-color: whitesmoke;
+    border-radius: 5px;
 
     padding: 2em;
     box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2),

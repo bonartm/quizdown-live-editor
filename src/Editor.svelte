@@ -43,9 +43,6 @@
 </div>
 
 <style>
-  .editor-container {
-    padding: 1em;
-  }
   .editor {
     height: 600px;
     max-height: 900px;
